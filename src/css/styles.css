@@ -76,6 +76,7 @@
 }
 
 .card-info {
+  display: flex;
   margin-top: 10px;
   text-align: center;
 }

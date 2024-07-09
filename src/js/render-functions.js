@@ -17,9 +17,18 @@ export function createGallery(imagesData) {
         <img src="${image.webformatURL}" alt="${image.tags}">
       </a>
       <div class="card-info">
-        <p>Likes: ${image.likes}</p>
-        <p>Views: ${image.views}</p>
-        <p>Comments: ${image.comments}</p>
+        <div class="likes-info">
+        <p>Likes</p>
+      <p class="likes-count">${image.likes}</p> <!-- Отображение количества лайков -->
+    </div>
+    <div class="likes-info">
+    <p>Views</p>
+        <p>${image.views}</p>
+        </div>
+        <div class="likes-info">
+    <p>Comments</p>
+        <p> ${image.comments}</p>
+        </div>
         <p>Downloads: ${image.downloads}</p>
       </div>
     </div>
