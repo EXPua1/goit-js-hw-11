@@ -23,3 +23,24 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
+.search input:hover {
+  color: blue;
+}
+
+.search input {
+  height: 40px;
+  width: 272px;
+}
+.search button {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: #4e75ff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  border-color: transparent;
+  height: auto;
+}
