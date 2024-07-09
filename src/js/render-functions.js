@@ -1,11 +1,17 @@
 import SimpleLightbox from 'simplelightbox';
-// Додатковий імпорт стилів
+// Дополнительный импорт стилей
 import 'simplelightbox/dist/simple-lightbox.min.css';
+
+// Инициализация SimpleLightbox
+let lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+  close: true,
+  nav: true,
+});
 
 export function createGallery(imagesData) {
   const gallery = document.querySelector('.gallery');
-
-  // Очистка текущего содержимого галереи
   gallery.innerHTML = '';
 
   // Создание HTML строк для всех изображений
@@ -17,18 +23,9 @@ export function createGallery(imagesData) {
         <img src="${image.webformatURL}" alt="${image.tags}">
       </a>
       <div class="card-info">
-        <div class="likes-info">
-        <p>Likes</p>
-      <p class="likes-count">${image.likes}</p> <!-- Отображение количества лайков -->
-    </div>
-    <div class="likes-info">
-    <p>Views</p>
-        <p>${image.views}</p>
-        </div>
-        <div class="likes-info">
-    <p>Comments</p>
-        <p> ${image.comments}</p>
-        </div>
+        <p>Likes: ${image.likes}</p>
+        <p>Views: ${image.views}</p>
+        <p>Comments: ${image.comments}</p>
         <p>Downloads: ${image.downloads}</p>
       </div>
     </div>
@@ -36,16 +33,8 @@ export function createGallery(imagesData) {
     )
     .join('');
 
-  // Вставка HTML строки в контейнер галереи
   gallery.insertAdjacentHTML('beforeend', galleryHTML);
 
-  // Инициализация SimpleLightbox
-  const lightbox = new SimpleLightbox('.gallery a', {
-    captionsData: 'alt',
-    captionDelay: 250,
-    close: true,
-    nav: true,
-
-    // Другие параметры настройки по вашему выбору
-  });
+  // Обновление lightbox после добавления новых элементов
+  lightbox.refresh();
 }
