@@ -44,3 +44,19 @@
   border-color: transparent;
   height: auto;
 }
+.gallery {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.gallery a {
+  flex: 0 0 calc((100% - 48px) / 3); /* Рассчитываем ширину элемента, учитывая отступы между ними */
+  max-width: 360px; /* Ограничиваем максимальную ширину элемента */
+  margin-bottom: 24px; /* Добавляем отступ снизу */
+}
+
+.gallery img {
+  width: 100%; /* Заполняем всю доступную ширину внутри родительского элемента */
+  height: auto; /* Сохраняем пропорции изображения */
+}
