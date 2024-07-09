@@ -6,8 +6,13 @@ import 'izitoast/dist/css/iziToast.min.css';
 const searchBtn = document.querySelector('.search button');
 const input = document.querySelector('.search input');
 const gallery = document.querySelector('.gallery');
+let isSearching = false; // Флаг для отслеживания состояния выполнения запроса
 
 searchBtn.addEventListener('click', () => {
+  if (isSearching) {
+    return; // Если уже выполняется запрос, выходим из функции
+  }
+
   addLoader();
   if (input.value === '') {
     iziToast.info({
@@ -19,6 +24,8 @@ searchBtn.addEventListener('click', () => {
     return;
   }
 
+  isSearching = true; // Устанавливаем флаг выполнения запроса в true
+
   setTimeout(() => {
     searchImages(input.value)
       .then(data => {
@@ -26,13 +33,16 @@ searchBtn.addEventListener('click', () => {
           errorMessage();
         } else {
           createGallery(data.hits);
+          input.value = '';
         }
         removeLoader(); // Убираем загрузчик после завершения запроса
+        isSearching = false; // Сбрасываем флаг выполнения запроса
       })
       .catch(error => {
         console.error('Ошибка при выполнении поискового запроса:', error);
         errorMessage(); // Отобразим сообщение об ошибке
         removeLoader(); // Убираем загрузчик в случае ошибки
+        isSearching = false; // Сбрасываем флаг выполнения запроса
       });
   }, 1000); // Задержка
 });
