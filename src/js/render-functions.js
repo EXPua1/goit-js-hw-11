@@ -10,7 +10,7 @@ let lightbox = new SimpleLightbox('.gallery a', {
   nav: true,
 });
 
-export function createGallery(imagesData) {
+export default function createGallery(imagesData) {
   const gallery = document.querySelector('.gallery');
   gallery.innerHTML = '';
 
@@ -23,10 +23,10 @@ export function createGallery(imagesData) {
         <img src="${image.webformatURL}" alt="${image.tags}">
       </a>
       <div class="card-info">
-        <p>Likes: ${image.likes}</p>
-        <p>Views: ${image.views}</p>
-        <p>Comments: ${image.comments}</p>
-        <p>Downloads: ${image.downloads}</p>
+        <p>Likes ${image.likes}</p>
+        <p>Views ${image.views}</p>
+        <p>Comments ${image.comments}</p>
+        <p>Downloads ${image.downloads}</p>
       </div>
     </div>
   `
