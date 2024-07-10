@@ -3,18 +3,20 @@ import createGallery from './js/render-functions';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-const searchBtn = document.querySelector('.search button');
-const input = document.querySelector('.search input');
+const searchForm = document.getElementById('searchForm');
+const searchInput = document.getElementById('searchInput');
 const gallery = document.querySelector('.gallery');
 let isSearching = false; // Флаг для отслеживания состояния выполнения запроса
 
-searchBtn.addEventListener('click', () => {
+searchForm.addEventListener('submit', event => {
+  event.preventDefault(); // Предотвращаем стандартное поведение отправки формы
+
   if (isSearching) {
     return; // Если уже выполняется запрос, выходим из функции
   }
 
   addLoader();
-  if (input.value === '') {
+  if (searchInput.value.trim() === '') {
     iziToast.info({
       title: 'Внимание',
       message: 'Введите текст для поиска изображений',
@@ -27,13 +29,14 @@ searchBtn.addEventListener('click', () => {
   isSearching = true; // Устанавливаем флаг выполнения запроса в true
 
   setTimeout(() => {
-    searchImages(input.value)
+    searchImages(searchInput.value.trim())
       .then(data => {
         if (data.hits.length === 0) {
+          gallery.innerHTML = '';
           errorMessage();
         } else {
           createGallery(data.hits);
-          input.value = '';
+          searchInput.value = ''; // Очищаем поле ввода после успешного поиска
         }
         removeLoader(); // Убираем загрузчик после завершения запроса
         isSearching = false; // Сбрасываем флаг выполнения запроса
